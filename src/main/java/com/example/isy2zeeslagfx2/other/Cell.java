@@ -1,4 +1,4 @@
-package com.example.isy2zeeslagfx2.model.Board.Cell;
+package com.example.isy2zeeslagfx2.other;
 
 public class Cell {
     private int shipId;

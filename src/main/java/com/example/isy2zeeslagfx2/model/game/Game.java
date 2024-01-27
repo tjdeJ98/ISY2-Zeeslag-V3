@@ -5,4 +5,5 @@ public interface Game {
     void update();
     boolean isGameOver();
     void endGame();
+    void switchPlayer();
 }

@@ -20,10 +20,14 @@ public class GameLoop {
             while (running) {
                 gameController.initializeGame();
                 gameController.update(); // just game logic goes here, what needs to be done
-
-                Platform.runLater(() -> {
-                    // update UI and stuff like controller.render()
-                });
+                if (gameController.isGameOver()) {
+                    stopGame();
+                } else {
+                    gameController.switchPlayer();
+                    Platform.runLater(() -> {
+                        // Update UI and stuff like controller.render()
+                    });
+                }
 
                 try {
                     Thread.sleep(100); // 60 updates per second possible

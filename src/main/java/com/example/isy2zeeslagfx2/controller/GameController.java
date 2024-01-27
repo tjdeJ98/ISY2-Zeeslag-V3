@@ -15,4 +15,5 @@ public abstract class GameController  {
     public abstract void render(); // Render the game state (for graphical games)
     public abstract boolean isGameOver(); // Check if the game has ended
     public abstract void endGame(); // Perform any cleanup at the end of the game
+    public abstract void switchPlayer();
 }

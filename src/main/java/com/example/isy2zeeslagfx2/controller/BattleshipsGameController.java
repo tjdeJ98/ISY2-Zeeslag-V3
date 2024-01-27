@@ -46,4 +46,9 @@ public class BattleshipsGameController extends GameController {
         // Additional logic for ending the game, such as displaying the winner, cleanup
     }
 
+    @Override
+    public void switchPlayer() {
+        game.switchPlayer();
+    }
+
 }

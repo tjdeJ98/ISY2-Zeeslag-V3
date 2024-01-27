@@ -1,7 +1,7 @@
 package com.example.isy2zeeslagfx2.model.Board;
 
 
-import com.example.isy2zeeslagfx2.model.Board.Cell.Cell;
+import com.example.isy2zeeslagfx2.other.Cell;
 import com.example.isy2zeeslagfx2.model.player.Player;
 import com.example.isy2zeeslagfx2.other.MoveInfo;
 import com.example.isy2zeeslagfx2.other.Ship;
@@ -119,6 +119,7 @@ public class BattleshipsBoard implements Board {
                 }
             }
         }
+        ship.setCoordinates(coordinates);
     }
 
     public boolean shipPlacementPossible(String startCoordinate, String endCoordinate, Ship ship)
