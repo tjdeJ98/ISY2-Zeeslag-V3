@@ -1,6 +1,7 @@
 package com.example.isy2zeeslagfx2.model.player;
 
 import com.example.isy2zeeslagfx2.model.Board.Board;
+import com.example.isy2zeeslagfx2.model.player.actionprocessor.PlayerActionProcessor;
 
 public class AIPlayer implements Player {
 
@@ -21,6 +22,11 @@ public class AIPlayer implements Player {
 
     @Override
     public Board getBoard() {
+        return null;
+    }
+
+    @Override
+    public PlayerActionProcessor getActionProcessor() {
         return null;
     }
 }

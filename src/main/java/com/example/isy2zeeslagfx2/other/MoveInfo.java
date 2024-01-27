@@ -5,7 +5,8 @@ import com.example.isy2zeeslagfx2.model.player.Player;
 public class MoveInfo {
     private String moveType;
     private Ship ship;
-    private Player player;
+    private Player curPlayer;
+    private Player otherPlayer;
 
     public MoveInfo(String moveType, Ship ship)
     {
@@ -16,10 +17,16 @@ public class MoveInfo {
     public MoveInfo(String moveType, Player player)
     {
         this.moveType = moveType;
-        this.player = player;
+        this.otherPlayer = player;
     }
 
     public MoveInfo(){}
+
+    public MoveInfo (String moveType, Player curPlayer, Player otherPlayer) {
+        this.moveType = moveType;
+        this.curPlayer = curPlayer;
+        this.otherPlayer = otherPlayer;
+    }
 
     public MoveInfo(String moveType)
     {
@@ -39,8 +46,13 @@ public class MoveInfo {
         return ship;
     }
 
-    public Player getPlayer()
+    public Player getCurPlayer()
     {
-        return player;
+        return curPlayer;
+    }
+
+    public Player getOtherPlayer()
+    {
+        return otherPlayer;
     }
 }

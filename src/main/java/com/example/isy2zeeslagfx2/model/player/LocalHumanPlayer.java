@@ -34,7 +34,7 @@ public class LocalHumanPlayer implements Player {
 
     @Override
     public void makeMove(Player otherPlayer) {
-        actionProcessor.makeMove(this, otherPlayer);
+        actionProcessor.makeMove(null, null, new MoveInfo("makeMove", otherPlayer));
     }
 
     public PlayerActionProcessor getActionProcessor()

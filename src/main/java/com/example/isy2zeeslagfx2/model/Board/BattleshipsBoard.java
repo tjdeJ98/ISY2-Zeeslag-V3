@@ -43,10 +43,15 @@ public class BattleshipsBoard implements Board {
                 case "place":
                     List<String> coordinates = getAllCoordinatesShipWillCover(x, y);
                     placeShip(coordinates, moveInfo.getShip());
+                    break;
                 case "print hits":
                     printOnlyHitsBoard();
+                    break;
                 case "shot":
-                    processShot(x, moveInfo.getPlayer());
+                    processShot(x, moveInfo.getOtherPlayer());
+                    break;
+                default:
+                    break;
             }
 
         }
@@ -95,7 +100,7 @@ public class BattleshipsBoard implements Board {
     {
         int shipid = select(coordinate);
         if (shipid!=-1) {
-            otherPlayer.getActionProcessor().makeMove(shipid, null, new MoveInfo("ship hit"));
+            otherPlayer.getActionProcessor().makeMove(String.valueOf(shipid), null, new MoveInfo("ship hit", otherPlayer));
             System.out.println("You hit a ship!");
         }
     }
@@ -225,7 +230,7 @@ public class BattleshipsBoard implements Board {
         Cell cell = getBattleshipCellByCoordinate(coordinate);
         cell.setHit();
 
-        return cell.getShipId();
+        return cell.getShipid();
     }
 
 

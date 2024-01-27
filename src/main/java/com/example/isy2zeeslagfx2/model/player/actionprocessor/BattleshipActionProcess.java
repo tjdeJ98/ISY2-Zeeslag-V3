@@ -6,6 +6,7 @@ import com.example.isy2zeeslagfx2.other.MoveInfo;
 import com.example.isy2zeeslagfx2.other.Ship;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class BattleshipActionProcess implements PlayerActionProcessor {
@@ -20,7 +21,9 @@ public class BattleshipActionProcess implements PlayerActionProcessor {
     }
 
     private void setupFase(Player player) {
+        System.out.println(player.getName());
         while (setupTodo) {
+            printShips();
             Ship ship = selectShip();
             String[] validCoordinates;
 
@@ -56,6 +59,13 @@ public class BattleshipActionProcess implements PlayerActionProcessor {
             }
 
             return new String[]{x, y};
+        }
+    }
+
+    private void printShips()
+    {
+        for (Ship ship : ships){
+            System.out.println(ship.getId() + " - " + ship.getSize());
         }
     }
 
@@ -102,9 +112,23 @@ public class BattleshipActionProcess implements PlayerActionProcessor {
     }
 
     @Override
-    public void makeMove(Player player, Player otherPlayer)
+    public void makeMove(String x, String y, Object moveData)
     {
-        makeShot(player, otherPlayer);
+        if (moveData instanceof MoveInfo){
+            MoveInfo moveInfo = (MoveInfo) moveData;
+            switch (moveInfo.getMoveType()) {
+                case "make shot":
+                    makeShot(moveInfo.getCurPlayer(), moveInfo.getOtherPlayer());
+                    break;
+                case "ship hit":
+                    shipHit(Integer.parseInt(x));
+                    break;
+                default:
+                    System.out.println("action processor no move case found");
+                    break;
+            }
+        }
+
     }
 
     private void makeShot(Player player, Player otherPlayer)
@@ -119,12 +143,20 @@ public class BattleshipActionProcess implements PlayerActionProcessor {
         while (true) {
             String input = ConsoleHandler.getConsoleInput(message);
             if (player.getBoard().checkIfCoordinateExists(input)) {
-                if (!otherPlayer.getBoard().checkIfCellAlreadyPicked(input))
-                if (!otherPlayer.getBoard().checkIfCellAlreadyPicked(input))
+                if (!otherPlayer.getBoard().isValidMove(input, null, new MoveInfo("validate shot")))
                     return input;
             }
 
             System.out.println("Coordinate does not exist!");
+        }
+    }
+
+    private void shipHit(int shipid)
+    {
+        for (Ship ship : ships) {
+            if (ship.getId() == shipid) {
+                ship.takeHit();
+            }
         }
     }
 }
