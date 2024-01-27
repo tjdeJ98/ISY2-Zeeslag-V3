@@ -11,6 +11,7 @@ public class BattleshipsGame implements Game {
     private Player player2;
     private boolean isPlayer1Turn;
     private boolean firstRound;
+    private int turnCount;
 
     public BattleshipsGame()
     {
@@ -18,23 +19,27 @@ public class BattleshipsGame implements Game {
         player2 = new LocalHumanPlayer("Guest", new BattleshipsBoard(8), new BattleshipActionProcess());
         isPlayer1Turn = true;
         firstRound = true;
+        turnCount = 0;
     }
 
     @Override
     public void initialize() {
+        turnCount++;
         if (isPlayer1Turn) {
             player1.initialize();
         } else {
             player2.initialize();
             firstRound = false;
         }
+
+
         // Handle player input, update the board, check for hits/misses, switch turns, etc.
         // Initialize the board, place ships, set the current player, etc.
     }
 
     @Override
     public void update() {
-        if (!firstRound) {
+        if (turnCount>2) {
             getCurPlayer().makeMove(getOtherPlayer());
         }
         // Handle player input, update the board, check for hits/misses, switch turns, etc.

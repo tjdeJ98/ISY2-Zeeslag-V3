@@ -44,8 +44,8 @@ public class BattleshipActionProcess implements PlayerActionProcessor {
                 this.setupTodo = false;
             }
         }
-        player.getBoard().printBoard();
         player.getBoard().makeMove(null, null, new MoveInfo("print hits"));
+        player.getBoard().printBoard();
     }
 
     private String[] getValidCoordinates(Ship ship, Player player) {
